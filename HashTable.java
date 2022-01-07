@@ -1,7 +1,6 @@
 import java.util.Arrays;
 
 public class HashTable {
-    // public for testing purposes
     public int[] buckets;
     public long a; //The constant for the equation
     public long c; //Another constant for the equation
