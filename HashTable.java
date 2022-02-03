@@ -1,7 +1,7 @@
 import java.util.Arrays;
 
 public class HashTable {
-    public int[] buckets;
+    private int[] buckets;
     public long a; //The constant for the equation
     public long c; //Another constant for the equation
     public int m; //Number of buckets of the hashtable.
@@ -34,7 +34,7 @@ public class HashTable {
         }
 
         //Finding the index at which key will be inserted
-        int insertAtIndex = (int)((a*key+c)% buckets.length); //This is the equation. You can change it according to the equation of your hash table.
+        int insertAtIndex = (int)((a*key+c)% buckets.length); //This is the equation for the hash table
 
         //Looping from insertAtIndex to buckets.length to find
         //an empty spot to fill the key
@@ -73,7 +73,7 @@ public class HashTable {
      * This function returns true if key is found and false otherwise
     */
     public boolean find(int key) {
-        int index = (int) ((a*key+c)%m); //This is the equation I'm using for my hash table. You can change it according to your hash table needs.
+        int index = (int) ((a*key+c)%m); //This is the equation for the hash table
         if(buckets[index] == key){
             System.out.println("Found the key: " + key + " at index = " + index);
             return true;
