@@ -1,2 +1,2 @@
 # University
-Putting in all my code from projects in Uni
+Putting in all my code from projects I created for Uni
