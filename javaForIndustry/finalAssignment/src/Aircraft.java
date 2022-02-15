@@ -12,7 +12,7 @@ public class Aircraft {
     private File layoutFile; //The file which stores the aircraft details
 
     //Constructor method which initialises each of the variable declared above.
-    public Aircraft(String make, String model, String tailNumber, double craftWeight, double maximumTakeoffWeight, File layoutFile){
+    public Aircraft(String make, String model, String tailNumber, double craftWeight, double maximumTakeoffWeight, File layoutFile) {
         this.make = make;
         this.model = model;
         this.tailNumber= tailNumber;
