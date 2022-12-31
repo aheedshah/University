@@ -1,0 +1,19 @@
+<!--The page which list every username in the database -->
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Welcome to <%=shopName%></title>
+        <!-- Linking my CSS -->
+        <link rel="stylesheet"  type="text/css" href="main.css" />
+    </head>
+    <body>
+        <h1><a href="/"><%=shopName%></a> Shop</h1>
+        <h2>Here are the users that we have:</h2>
+        <ul>
+        <!-- availableUsers var comes from main.js which gets all the usernames which have signed up with us -->
+        <% availableUsers.forEach(function(userDetails) { %>
+            <li><%=userDetails.username%></li>
+        <% }) %>
+        </ul>
+    </body>
+</html>

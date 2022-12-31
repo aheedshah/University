@@ -1,0 +1,19 @@
+<!--This is the page which lets users add a book and it's price to the Database-->
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Add book to <a href="/"><%=shopName%></a></title>
+        <!-- Linking my CSS -->
+        <link rel="stylesheet"  type="text/css" href="main.css" />
+    </head>
+    <body>
+        <h1><a href="/"><%=shopName%></a>: Add book</h1>
+        <!-- The form to add a new book, and it's price -->
+        <form method="POST" action="/bookadded">
+            <label for="name">Book Name:</label><input id="name" type="text" name="name" /><br><br>
+            <label for="price">Price:</label><input id="price" type="text" name="price" /><br><br>
+            <input type="submit" value="Add Book" />
+        </form>
+    </body>
+</html>
+

@@ -1,0 +1,19 @@
+<!-- The page which list all the books in our database -->
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Welcome to <%=shopName%></title>
+        <!-- Linking my CSS -->
+        <link rel="stylesheet"  type="text/css" href="main.css" />
+    </head>
+     <body>
+        <h1><a href="/"><%=shopName%></a> Shop</h1>
+        <h2>Here are the books that we sell:</h2>
+        <ul>
+          <!-- availableBooks is a var that comes from main.js which has all the books requested -->
+          <% availableBooks.forEach(function(book) { %>
+            <li><%=book.name%>, &#163;<%=book.price%> </li>
+          <% }) %>
+        </ul>
+    </body>
+</html>
