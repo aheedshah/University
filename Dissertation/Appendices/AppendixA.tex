@@ -1,25 +1,85 @@
 % Appendix A
 
-\chapter{Frequently Asked Questions} % Main appendix title
+\chapter{Setting up a database in Firebase}
+\label{AppendixA}
 
-\label{AppendixA} % For referencing this appendix elsewhere, use \ref{AppendixA}
+To set up firebase, you need to login to the \href{http://firebase.google.com}{Firebase Website} and create an account. A Gmail account is required for Firebase. 
 
-\section{How do I change the colors of links?}
+After that, you need to create a new project. For this, you need to go to the Firebase Console and click on "Add a new project". You will then be prompted to register the app within firebase and also set a name for the app in Firebase. After doing that, Firebase provides you with the Scripts to connect Firebase to your Web Application. For my application, this looks like:
 
-The color of links can be changed to your liking using:
+\begin{lstlisting}
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-{\small\verb!\hypersetup{urlcolor=red}!}, or
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDB6ECgmOtg-27g6N1NhoH3YiRWEZFQL6c",
+  authDomain: "jobcrop-f80a0.firebaseapp.com",
+  projectId: "jobcrop-f80a0",
+  storageBucket: "jobcrop-f80a0.appspot.com",
+  messagingSenderId: "794559361590",
+  appId: "1:794559361590:web:2aa2e7feea6619c9de5e97",
+  measurementId: "G-SEZEV627SS"
+};
 
-{\small\verb!\hypersetup{citecolor=green}!}, or
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+\end{lstlisting}
 
-{\small\verb!\hypersetup{allcolor=blue}!}.
+Dependencies for firebase also need to be installed which can be done by "npm install firebase" in the terminal. 
 
-\noindent If you want to completely hide the links, you can use:
+Doing the process above connects the web app to Firebase which can then read and write data to the database. 
 
-{\small\verb!\hypersetup{allcolors=.}!}, or even better: 
+Many sign-in processes are supported by Firebase, but for this web app, during the development stages, only email and password was the only that was selected. See figure \ref{fig:sign-in-methods}. But, as this app continues to build, other providers can be added to make it easier for users to log into the app.
 
-{\small\verb!\hypersetup{hidelinks}!}.
+\begin{figure}
+    \centering
+    \includegraphics[width = 140mm]{Figures/sign-in-methods.png}
+    \caption{Sign In Methods in Firebase}
+    \label{fig:sign-in-methods}
+\end{figure}
 
-\noindent If you want to have obvious links in the PDF but not the printed text, use:
+After adding Firebase to our Web App, Databases to store data were also needed to be created. This was done in the Cloud Firestore section of Firebase. Cloud Firestore keeps your data in sync across client apps. Databases as stated in the Entity Relationship Diagram in figure \ref{fig: Entity Relationship Diagram} were made as this best suited the database needs. The Databases created are also given below from figures \ref{fig: app-information} to \ref{fig: job-1}.
 
-{\small\verb!\hypersetup{colorlinks=false}!}.
+\begin{figure}
+    \centering
+    \includegraphics[width = 140mm]{Figures/app-information.png}
+    \caption{Application Information Database}
+    \label{fig: app-information}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width = 140mm]{Figures/app-reqs.png}
+    \caption{Application Requirements Database}
+    \label{fig: app-reqs}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width = 140mm]{Figures/employers.png}
+    \caption{Employers Database}
+    \label{fig: employers}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width = 140mm]{Figures/job-1.png}
+    \caption{Job Example Database}
+    \label{fig: job-1}
+\end{figure}
+
+\newpage
+Users are stored in the Authentication section of firebase. For testing purposes and to remain compliant with ethical and GDPR compliance, only one user is made for testing purposes. This is done to make sure no other information from any other individual is stored in the database and to protect testers currently testing the product. The users authentication section can be seen in figure \ref{fig: authentication}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width = 140mm]{Figures/authentication.png}
+    \caption{Users Authentication Database}
+    \label{fig: authentication}
+\end{figure}

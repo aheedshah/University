@@ -48,6 +48,32 @@ headsepline, % Uncomment to get a line under the header
 \addbibresource{example.bib} % The filename of the bibliography
 
 \usepackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
+\usepackage{listings}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
 
 %----------------------------------------------------------------------------------------
 %	MARGIN SETTINGS
@@ -123,6 +149,9 @@ headsepline, % Uncomment to get a line under the header
  
 \vfill
 
+\large {GitHub Link: \href{https://www.github.com/aheedshah/job-crop}{https://www.github.com/aheedshah/job-crop}}\\[0.3cm]
+\large {A video is submitted with the submission to show how the app works and how it can be run locally by cloning it from GitHub}\\[0.3cm]
+\large {For testing the login page, the username and password both are \textbf{jbond007@gold.ac.uk}}\\[0.3cm]
 \large \textit{A thesis submitted in fulfilment of the requirements\\ for the degree of \degreename}\\[0.3cm] % University requirement text
 \textit{in the}\\[0.4cm]
 \groupname\\\deptname\\[2cm] % Research group name and department name
@@ -177,8 +206,9 @@ headsepline, % Uncomment to get a line under the header
 %----------------------------------------------------------------------------------------
 
 \begin{abstract}
-\addchaptertocentry{\abstractname} % Add the abstract to the table of contents
-\textit{Job Crop} is a modern job search engine built to make it easy for job-seekers in the tech industry to find jobs. This web app will provide job-seekers with pamphlets of jobs which recruiters in the tech industry, from startups to tech giants, will post. The idea of this application is to show only relevant roles to users by filtering out unnecessarily huge job descriptions and providing a concise User Interface.
+% Add the abstract to the table of contents
+\addchaptertocentry{\abstractname} 
+\textit{Job Crop} is a modern job search application built to make it easy for job-seekers in the tech industry to find jobs set exactly to their preference. This web application matches applicants with job postings which helps job postings to reach a targeted audience who have the necessary skills and qualifications for the position. This application aims to show only relevant roles to users by filtering out unnecessarily huge job descriptions and providing a concise user interface on the application. 
 
 \end{abstract}
 
@@ -211,6 +241,11 @@ headsepline, % Uncomment to get a line under the header
 \textbf{ER} & \textbf{E}ntity \textbf{R}elationship\\
 \textbf{ERD} & \textbf{E}ntity \textbf{R}elationship \textbf{D}iagram\\
 \textbf{URI} & \textbf{U}niversal \textbf{R}esource \textbf{I}dentifier\\
+\textbf{ML} & \textbf{M}achine \textbf{L}earning\\
+\textbf{QA} & \textbf{Q}uality \textbf{A}ssurance\\
+\textbf{Web App} & \textbf{W}ebsite \textbf{A}pplication\\
+\textbf{HTML} & \textbf{H}yper \textbf{T}ext \textbf{M}arkup \textbf{Language}\\
+\textbf{CSS} & \textbf{C}ascading \textbf{S}tyle \textbf{S}heets\\
 
 \end{abbreviations}
 
@@ -260,11 +295,14 @@ headsepline, % Uncomment to get a line under the header
 % Include the chapters of the thesis as separate files from the Chapters folder
 % Uncomment the lines as you write the chapters
 
-\include{Chapters/introduction}
-\include{Chapters/backgroundresearch} 
-\include{Chapters/design}
-%\include{Chapters/Chapter4} 
-%\include{Chapters/Chapter5} 
+\include{Chapters/1_Introduction}
+\include{Chapters/2_Background}
+\include{Chapters/3_Design}
+\include{Chapters/4_Implementation}
+\include{Chapters/5_Testing}
+\include{Chapters/6_Discussion}
+\include{Chapters/7_Limitations}
+\include{Chapters/8_Conclusion}
 
 %----------------------------------------------------------------------------------------
 %	THESIS CONTENT - APPENDICES
@@ -275,7 +313,7 @@ headsepline, % Uncomment to get a line under the header
 % Include the appendices of the thesis as separate files from the Appendices folder
 % Uncomment the lines as you write the Appendices
 
-% \include{Appendices/AppendixA}
+\include{Appendices/AppendixA}
 %\include{Appendices/AppendixB}
 %\include{Appendices/AppendixC}
 

@@ -1,0 +1,391 @@
+\chapter{Implementation}
+This web app is written in React, a free and open-source front-end JavaScript library for building user interfaces based on components. Meta and a community of individual developers and companies maintain it \parencite{Reference31}. Other libraries, such as React Router, were also used to route among various components in the application. Its primary function is to implement dynamic routing in web applications and was a vital part of the development of this application. 
+
+React was used in this application because of various reasons. Some of these are listed below: 
+
+\begin{enumerate}
+    \item React's component-based architecture makes it easy to break down complex user interfaces into smaller, reusable components. This can improve code maintainability and make it easier to scale the website as it grows. This can be seen through each of the files on GitHub. Every component, like the Footer and NavBar components, is reusable, which means code doesn't need to be rewritten for every page. Refer to \textit{src/components/Footer.js} and \textit{src/components/NavBar.js} on GitHub.
+    \item React can create a single-page application where users can interact with different components without reloading the page. This is essential as it would be frustrating for users to reload the page whenever they want to see a new match.
+    \item React's virtual DOM and efficient rendering algorithms allow quick updates and smoother user experiences, particularly in complex or dynamic interfaces.
+\end{enumerate}
+
+\section{Setting it up}
+Firebase is the database that was chosen to store user information, details, login information and other data. The steps taken to create this database are in Appendix \ref{AppendixA}. 
+
+Node.js must be downloaded for local development to create a react app from scratch. Node.js is an open-source server environment widely used for running web applications. Node.js can be downloaded from its \href{https://nodejs.org/en}{Official Website}. 
+
+A react app needs a package manager to provide a method to install new dependencies. Npm was the package manager chosen for this web app. Npm is the default package manager for Node.js, meaning no additional software was required. The React team also officially recommends using npm to manage packages for React projects.
+
+The steps that were taken to create this react app were:
+\begin{enumerate}
+    \item In the terminal, the following script was run to create a directory and install the basic dependencies: \textit{"npx create-next-app job-crop"}. Here, job-crop is the directory's name containing all the basic dependencies required to run the application. 
+    \item To start the application, \textit{"cd job-crop"} was run to go into the folder and \textit{"npm start"} is used to start the application.
+\end{enumerate}
+
+Other libraries were added as required using npm, such as react-router-dom, which helps to route to different components, Firebase, which is the database used, and others. 
+
+\section{Front-End}
+The Front-end of this application is written entirely in React. Reusable UI components were made and styled using CSS. React's state management was used to add interactivity to the application, such as updating the web page when a user clicks on a link on the Navigation Bar. Below is the description of each component created and used in the web app.
+
+\subsection{Home.js}
+This page is the home route of the web application ('/'). As this website uses reusable components, there isn't much code in this file related to other components like Footer, HeroSection and NavBar. These are imported from other files. The code for Home.js can be navigated on GitHub by going to \newline \textit{src/components/pages/Home.js}.
+
+\begin{lstlisting}
+//Importing Components
+import Cards from '../Cards';
+import MainSection from '../MainSection';
+import Footer from '../Footer';
+
+//Using the imported components
+function Home() {
+    return (
+        <>
+          <MainSection />
+          <Cards />
+          <Footer />
+        </>
+    );
+}
+\end{lstlisting}
+
+Here, components from different files are being rendered onto the main page by importing them, as seen in the lines above and then using them inside the Home function from lines 10-12. Details of the components are given on their specific pages.
+
+\subsection{About.js}
+This renders the About page of our application ('/about'). The about page describes what the web app is all about. This page uses an imported component from Features.js, which is used to render the bottom part of the web application, and also the Footer component is imported from Footer.js. The code for Home.js can be navigated on GitHub by going to src/components/pages/About.js.
+
+The components are imported as shown below:
+\begin{lstlisting}
+import Footer from "../Footer";
+import Features from "../Features";
+\end{lstlisting}
+
+A fade is used for the Core Features tab, which fades in when the user scrolls down the page. This was done by importing a library called AOS which allows us to animate elements on the web page as the user scrolls. This was installed by using \textit{"npm install aos --save"} and then using it on the web page as shown below
+
+\begin{lstlisting}
+<Features data-aos="fade-up" />
+\end{lstlisting}
+
+\subsection{ForEmployers.js}
+This page is designed to focus on employers looking forward to knowing more about the product. This web app heavily relies on the number of jobs on the platform, and employers also need to be shown why they should prefer this platform over others. That is the reason why this web page was made. 
+
+The code for ForEmployers.js can be navigated on GitHub by going to src/components/pages/ForEmployers.js. It contains many different div tags, as it was particularly difficult to develop this web page. To make the user interface concise, the reasons are divided into four cards a potential employer can look through. 
+
+\subsection{Login.js}
+This web page ('/login') uses Firebase to log users into the system and show their potential matches. This web page requests Firebase to first check whether the username and password match. If they do, this web page redirects to the Matches component, and an error message shows if they don't. For the sake of remaining GDPR Compliant and to remove any ethical obligations required for this web app, only one test user is made to test this web app. 
+
+A helper function \textit{onLogin} is used, which uses a Firebase function \textit{signInWithEmailAndPassword} to check whether the user and passwords exist. 
+
+\begin{lstlisting}
+const onLogin = (e) => {
+        e.preventDefault();
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                navigate("/matches")
+                console.log(user);
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode, errorMessage)
+                setErrorMessage("The Email address or password you've entered is wrong!")
+            });
+    }
+\end{lstlisting}
+
+The above function checks if the user exists in Firebase and if the password matches. If it does, the user is navigated to "/matches"; else, an error code is shown to the user.
+
+
+The complete code of the Login.js page can be found on GitHub by going to src/components/pages/Login.js.
+
+\subsection{Matches.js}
+The matches component shows what a potential match would look like for an applicant. A testing company was created which contains test data about that company. There are two buttons on the screen -- Next Job and Apply Now. The Apply Now button opens a modal which gives two options to the user, to either get redirected to the job on the company's website or close the modal. The modal was created to ensure users meant to click the button before getting redirected to an external website. The next job button still needs to be developed, and it should take the user to the next matched job. 
+
+A table was created as prototyped before in the design section in figure \ref{fig: Job Posting}
+
+The code for Matches.js can be accessed through GitHub from \textit{src/components/pages/Matches.js}
+
+\subsection{Sign-Up.js}
+The Sign Up component allows users to sign up for the application. This component is hidden but can be navigated by changing the URL to ('/sign-up'). It uses the same design and a CSS file as the login page, so some class names match the login components' class names. The Sign-Up button has been kept disabled temporarily to remain compliant with the GDPR and Ethical Obligations. The Sign Up component sends the new user's data to Firebase to add to the database. The new user can log in with their email address and password on the login page.
+
+The code for the sign-up component can be accessed through GitHub from \newline \textit{src/components/pages/Sign-Up.js}
+
+\subsection{Button.js}
+The Button component is a reusable component used for buttons throughout the web application. The idea of using Buttons as a reusable component is that Buttons are widely used in this web app, and creating button styles which are the same each time would result in unwanted reused code. To tackle this problem, the Button.js file was created. This currently has two styles of buttons which can be seen below, but more styles and designs can be added throughout the application as needed.
+
+\begin{lstlisting}
+const styles = ['primary-button', 'sides'];
+const sizes = ['secondary-button', 'large'];
+\end{lstlisting}
+
+The code for the sign-up component can be accessed through GitHub from \newline \textit{src/components/Button.js}
+
+\subsection{CardItem.js}
+This is a helper function for the Cards.js file. This takes in the props passed in through Cards.js and renders the Cards onto the screen for the web page. Props in React are arguments which can be passed into React components. Props are used in React, function arguments are used in JavaScript, and attributes are used in HTML. An example of props used is shown below:
+
+\begin{lstlisting}
+//Here, a brand attribute is added to the Car element
+const myElement = <Car brand="Ford" />;
+
+//Here, the brand attribute is being used in the component:
+function Car(props) {
+  return <h2>I am a { props.brand }!</h2>;
+}
+\end{lstlisting} \parencite{Reference32}
+
+CardItem is used as a helper and was created to reduce the code in the Cards.js file. The code for the CardsItem.js file can be accessed through GitHub from src/components/CardItem.js
+
+\subsection{Cards.js}
+Cards.js is a file which shows a bit more about the company on the home page. These cards were created to be responsive and can be viewed on a mobile screen. Inside these Cards are GIFs to grasp user attention and make them read about the company. These cards can be added or decreased without it having any impact on the front end. This is because of the styling added to these cards. 
+
+The GIFs used in this web app were from the website \href{https://giphy.com/explore/royalty-free}{giphy.com}, which contains royalty-free GIFs.
+
+The code for the Cards.js file can be accessed through GitHub from \newline \textit{src/components/Cards.js}
+
+\subsection{Features.js}
+This is a component which is used on the About page. This component renders a small paragraph for users to understand this web app better and reduce the lines of code in About.js. A library is downloaded on this web page called react-icons/bs. This library contains popular icons which can be used in React's web pages.
+
+The code for the Features.js file can be accessed through GitHub from \newline \textit{src/components/Features.js}
+
+\subsection{MainSection.js}
+This file renders the animation and the text on the home screen. A video is played on a loop behind the screen, and the main idea behind the application is written on top of the video. The video is from the website \href{https://www.videvo.net/stock-video-footage/placeholder/}{videvo.net}, which provides free placeholder videos. This file uses the component Button.js and the Sign In button is made using the Button component.
+
+The code for the MainSection.js file can be accessed through GitHub from \newline \textit{src/components/MainSection.js}
+
+\subsection{NavBar.js}
+The Navigation Bar is a component which is used on each page. It is completely responsive and can be used on any resolution device. The Navigation bar uses react-router-dom to navigate users to different pages and also the Button component from Button.js. The Navigation Bar was implemented using help from Stack Overflow \parencite{Reference33} and can be accessed through GitHub from \newline \textit{src/components/NavBar.js}
+
+\subsection{App.js}
+App.js is a simple Routing file which uses React Router to allow navigating without refreshing the page. React Router is used in the app.js file, as shown below.
+
+\begin{lstlisting}
+<Router>
+    <Navbar />
+    <Routes>
+        <Route path='/' exact element={<Home />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/for-employers' element={<ForEmployers />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/matches' element={<Matches />} />
+        <Route path='/sign-up' element={<SignUp />} />
+        <Route path="*" element={<Home />} />
+    </Routes>
+</Router>
+\end{lstlisting}
+
+The Navbar component is outside the Routes tag, so it does not update and the other components inside the Routes tag update as the user goes to different pages. The route path "*" redirects anyone who tries to go to a route that has not been defined to the Home page.
+
+The complete code can be accessed through GitHub from \newline \textit{src/components/App.js}
+
+\subsection{index.js}
+The index.js file in this app is the main component representing the entire application. This is standard for most react applications and renders the whole application. 
+
+The code below is what is responsible for rendering the whole application:
+\begin{lstlisting}
+ReactDOM.render(<App />, document.getElementById('root'));
+\end{lstlisting}
+
+\newpage
+\section{Database}
+The database of this web application is completely in Firebase. All the databases for the web app are in Cloud Firestore which is a part of Firebase. Cloud Firestore is a scalable NoSQL cloud database which is used store and sync data for client and server-side development. It keeps your data in sync across client apps through realtime listeners and offers offline support for mobile and web so you can build responsive apps that work regardless of network latency or Internet connectivity. Cloud Firestore also offers seamless integration with other Firebase and Google Cloud products, including Cloud Functions \parencite{Reference41}.
+
+Firebase was installed using the script:
+\begin{lstlisting}
+npm install firebase //This install firebase client and adds it to project dependencies
+npm i @react-firebase/auth //This installs react-firebase/auth which is used to authenticate logins
+\end{lstlisting}
+
+Firebase also needs its own separate JavaScript file to operate. This file contains the apiKeys and such data for firebase to talk with the Firebase cloud.
+
+The firebase.js file is shown below:
+\begin{lstlisting}
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDB6ECgmOtg-27g6N1NhoH3YiRWEZFQL6c",
+  authDomain: "jobcrop-f80a0.firebaseapp.com",
+  projectId: "jobcrop-f80a0",
+  storageBucket: "jobcrop-f80a0.appspot.com",
+  messagingSenderId: "794559361590",
+  appId: "1:794559361590:web:2aa2e7feea6619c9de5e97",
+  measurementId: "G-SEZEV627SS"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+\end{lstlisting}
+
+All the images of databases used and created in Firebase are given in Appendix \ref{AppendixA}.
+
+\section{Matching Algorithm}
+To match applicants with jobs, an algorithm is required. This algorithm should return true if a job is a match and false otherwise. This algorithm is not being currently used in the web app as the development stage isn't completed yet. 
+
+The following code will be used to demonstrate how an applicant is matched with a job posting.
+
+An applicant's preferences is first defined as an Object. Please note that when developed, this information will be stored in Firebase and not hard-coded.
+
+Below are the defined preferences for an applicant.
+\begin{lstlisting}
+const applicant = {
+  city: "London",
+  role: "Software Engineering",
+  subRoles: ["Back-end engineer", "DevOps Engineer"],
+  level: ["Senior-level jobs"],
+  favouriteTech: ["JavaScript", "Node.js"],
+  dislikedTech: ["Java"],
+  start: "As soon as possible",
+  minSalary: 50000,
+  visaNeeded: false,
+};
+\end{lstlisting}
+
+Now, a job posting's preferences are defined. This will also be stored completely in Firebase when developed.
+
+\begin{lstlisting}
+const employer = {
+  city: ["London", "Bristol"],
+  role: "Software Engineer",
+  level: ["Entry-level jobs", "Senior-level jobs"],
+  techStack: ["JavaScript", "Node.js", "React", "MongoDB"],
+  noticePeriod: ["Doesn't matter"],
+  maxSalary: 80000,
+  sponsor: true,
+};
+\end{lstlisting}
+
+Below is the algorithm used for matching the applicant's requirements with the employer's requirements. 
+
+\begin{lstlisting}
+function matchJob(applicant, employer) {
+  // Checking to see if job is available in the same city or remote
+  if (!employer.city.includes(applicant.city)) {
+    return false;
+  }
+
+  //Checking to see if the job role matches the applicant's desired role
+  //This can be changed to .includes if applicant selects multiple roles
+  if (employer.role !== applicant.role) {
+    return false;
+  }
+
+  //Checking to see if the sub role matches the applicant's desired sub role
+  if (!employer.role.includes(applicant.subRole)) {
+    return false;
+  }
+
+  //Checking to see if the job level matches the applicant's desired level
+  if (!applicant.level.includes(employer.level)) {
+    return false;
+  }
+
+  //Checking to see if the job requires any of the applicant's favourite technologies
+  //Only some technologies are needed for a match. If there are none, we return false
+  if (!employer.techStack.some((tech) => applicant.favoriteTech.includes(tech))) {
+    return false;
+  }
+
+  //Checking to see if the job requires any of the applicant's disliked technologies
+  //We return false if there are disliked technologies
+  if (employer.techStack.some((tech) => applicant.dislikedTech.includes(tech))) {
+    return false;
+  }
+
+  //Checking to see if the job's notice period is suitable for the applicant
+  if (!employer.noticePeriod.includes(applicant.start)) {
+    return false;
+  }
+
+  //Checking to see if the job's salary is equal to or greater than the applicant's minimum //salary
+  if (applicant.minSalary > employer.maxSalary) {
+    return false;
+  }
+
+  // Check if the job sponsors applicants if they require a visa to work in the UK
+  if (applicant.visaNeeded && !employer.sponsor) {
+    return false;
+  }
+
+  // If all conditions pass, return true
+  return true;
+}
+\end{lstlisting}
+If all of the above parameters match, the function returns true which should show the potential matches on the applicants screen. If any of the conditions are not true we return false and the job is not shown on the applicant's screen.
+
+The above function ensures that only relevant job openings are shown to the job applicant based on their answers to the questions asked, and the employer's requirements for the job opening. By doing this, it helps both the job applicant and employer find the best match for their needs and requirements.
+
+This algorithm will be implemented in the application when the MVP for employers is created.
+\section{Final Screenshots of the Web App}
+The figures from \ref{fig:MainSection} to \ref{fig:Redirect} are the final screenshots of the web application.
+\begin{figure}
+    \centering
+    \includegraphics[width = 140mm]{Figures/MainSection.png}
+    \caption{This is the component rendered by MainSection.js on the Home Page}
+    \label{fig:MainSection}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width = 140mm]{Figures/Cards.png}
+    \caption{This is the component rendered by Cards.js on the Home Page}
+    \label{fig:Cards}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width = 140mm]{Figures/Footer.png}
+    \caption{This is the component rendered by Footer.js. This is used at multiple places in the application}
+    \label{fig:Footer}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width = 140mm]{Figures/About.png}
+    \caption{This is a part of the rendered function in About.js}
+    \label{fig:About}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width = 140mm]{Figures/Features.png}
+    \caption{This is the component rendered by Features.js}
+    \label{fig:Features}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width = 140mm]{Figures/login.png}
+    \caption{This is the component rendered by Login.js}
+    \label{fig:login}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width = 140mm]{Figures/Matches.png}
+    \caption{This is the component rendered by Matches.js which shows potential matches}
+    \label{fig:Matches}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width = 140mm]{Figures/MatchFound.png}
+    \caption{This is the modal rendered when user clicks on the Apply Now button in Matches.js file}
+    \label{fig:MatchFound}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=140mm]{Figures/Redirect.png}
+    \caption{This is the modal rendered when the user clicks on the Apply button inside the MatchFound modal. This button is meant to redirect users to the company website}
+    \label{fig:Redirect}
+\end{figure}
+
+\newpage
+\section{Ethical and GDPR Compliancy}
+To remain compliant with the University's ethical guidelines and GDPR guidelines, only test and dummy data is used in this web application. To make sure users/testers do not sign up with their email addresses and passwords, only one test user is created. This helps keep the web app compliant as no one will accidentally provide sensitive information into the web application.
+\section{Implementation Conclusion}
+The development of this web app began with a couple of major problems. One was the unfamiliarity with using React. Due to the unfamiliarity with the main part of the tech-stack, the development process was limited for some time. This time was taken to test designs and learn react using online resources. 
+
+When the testing for the home page was completed and another design was made, the implementation was started without any delay. The idea behind using React was its reusable components and that is why components were built keeping this in mind from the start. Developing the first page took particularly long to make as it was the first component, but soon, the multiple pages were made and it started to blend in well. 
+
+Unit Tests were written for each file as they were built to make sure the right things were being rendered on to the screen. For this Jest was used and learning a testing framework for the first time also took some time. Testing react components using Jest worked pretty well as it is the recommended testing framework for testing react components. 
+
+An Applicants MVP was built during the implementation stages. In the web app, the applicant can login, see a potential match and navigate around the web app. But, as the time to build this web app was quite constrained and learning and testing the app took most of the time, an MVP for Employers couldn't be built in time where they could add a new job, update/edit jobs and view their dashboard. The questionnaire which needs to be filled in by applicants when they sign up is also something that needs to be developed and will be done in the future. 

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Algorithms/Algorithms.iml" filepath="$PROJECT_DIR$/Algorithms/Algorithms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Algorithms/HashTable/HashTable.iml" filepath="$PROJECT_DIR$/Algorithms/HashTable/HashTable.iml" />
+      <module fileurl="file://$PROJECT_DIR$/University.iml" filepath="$PROJECT_DIR$/University.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Wordle /Wordle .iml" filepath="$PROJECT_DIR$/Wordle /Wordle .iml" />
+      <module fileurl="file://$PROJECT_DIR$/extendedJava/extendedJava.iml" filepath="$PROJECT_DIR$/extendedJava/extendedJava.iml" />
+      <module fileurl="file://$PROJECT_DIR$/javaForIndustry/finalAssignment/finalAssignment.iml" filepath="$PROJECT_DIR$/javaForIndustry/finalAssignment/finalAssignment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/extendedJava/labAssignment1/labAssignment1.iml" filepath="$PROJECT_DIR$/extendedJava/labAssignment1/labAssignment1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/javaForIndustry/labAssignment1/labAssignment11.iml" filepath="$PROJECT_DIR$/javaForIndustry/labAssignment1/labAssignment11.iml" />
+      <module fileurl="file://$PROJECT_DIR$/extendedJava/labAssignment2/labAssignment2.iml" filepath="$PROJECT_DIR$/extendedJava/labAssignment2/labAssignment2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/javaForIndustry/labAssignment2/labAssignment21.iml" filepath="$PROJECT_DIR$/javaForIndustry/labAssignment2/labAssignment21.iml" />
+      <module fileurl="file://$PROJECT_DIR$/javaForIndustry/midTermAssignment/midTermAssignment.iml" filepath="$PROJECT_DIR$/javaForIndustry/midTermAssignment/midTermAssignment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sortingAlgorithms/sortingAlgorithms.iml" filepath="$PROJECT_DIR$/sortingAlgorithms/sortingAlgorithms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sudokuSolver/sudokuSolver.iml" filepath="$PROJECT_DIR$/sudokuSolver/sudokuSolver.iml" />
+    </modules>
+  </component>
+</project>
